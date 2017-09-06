@@ -1,0 +1,13 @@
+{
+  "name": "mongoose-async",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "is-promise": "^2.1.0",
+    "mongoose": "^4.11.10"
+  }
+}
