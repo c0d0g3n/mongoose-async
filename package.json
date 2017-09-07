@@ -1,8 +1,14 @@
 {
   "name": "mongoose-async",
   "description": "Little mongoose plugin that mocks getters/setters and accepts promises (async)",
-  "keywords": ["mongoose", "async", "getter", "setter", "promise"],
-  "version": "1.0.0",
+  "keywords": [
+    "mongoose",
+    "async",
+    "getter",
+    "setter",
+    "promise"
+  ],
+  "version": "1.0.1",
   "main": "src/plugin.js",
   "license": "MIT",
   "repository": "https://github.com/c0d0g3n/mongoose-async",
