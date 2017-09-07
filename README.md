@@ -9,49 +9,61 @@ That said, I started thinkering with ways to get around this limitation, and thi
 Feel free to improve, comment or critique this plugin and make sure to **follow [#4227](https://github.com/Automattic/mongoose/issues/4227)** because the functionality this plugin is trying to "polyfill" may or may not land in the core of Mongoose soon.
 
 ## Installation
-    npm install mongoose-async
+```bash
+npm install mongoose-async
+```
 
 or
 
-    yarn add mongoose-async
+```bash
+yarn add mongoose-async
+```
 
 ## Usage
 ### Activate the plugin
-    const mongoose = require('mongoose')
-    const mongooseAsync = require('mongoose-async')
+```javascript
+const mongoose = require('mongoose')
+const mongooseAsync = require('mongoose-async')
 
-    // mongoose schema that needs async getters/setters
-    const schema = new mongoose.Schema({...})
+// mongoose schema that needs async getters/setters
+const schema = new mongoose.Schema({...})
 
-    // add plugin to schema (options see below)
-    schema.plugin(mongooseAsync, options)
+// add plugin to schema (options see below)
+schema.plugin(mongooseAsync, options)
+```
 
 Alternatively (add to every schema):
 
-    const mongoose = require('mongoose')
-    const mongooseAsync = require('mongoose-async')
+```javascript
+const mongoose = require('mongoose')
+const mongooseAsync = require('mongoose-async')
 
-    mongoose.plugin(mongooseAsync, options)
+mongoose.plugin(mongooseAsync, options)
+```
 
 [Mongoose plugin docs](http://mongoosejs.com/docs/plugins.html)
 
 ### Add getters/setters
 To avoid conflicts, you can define a getter using the `read` property (instead of `get`) and a setter using the `write` property (instead of `set`).
 
-    const schema = new mongoose.Schema({
-      somePath: {
-        type: String,
-        // ...
-        read: async (value, schemaType, document) => {
-          // do something async
-          return 'value that your code sees'
-        },
-        write: async (value, schemaType, document) => {
-          // do something async
-          return 'value that is stored in database'
-        }
-      }
-    })
+```javascript
+const schema = new mongoose.Schema({
+  somePath: {
+    type: String,
+    // ...
+    read: async (value, schemaType, document) => {
+      // this === document (like mongoose getter)
+      // do something async
+      return 'value that your code sees'
+    },
+    write: async (value, schemaType, document) => {
+      // this === document (like mongoose setter)
+      // do something async
+      return 'value that is stored in database'
+    }
+  }
+})
+```
 
 Note synchronous functions work too.
 
@@ -59,23 +71,27 @@ Although not tested, you should still be able to use Mongoose native [getters](h
 
 Also remember the **getters** of this plugin get **always applied**. Native getters do not get applied by default when `doc.toJSON` or `doc.toObject` are called. You can change this behavior as done below:
 
-    schema.set('toJSON', {getters: true})
-    schema.set('toObject', {getters: true})
+```javascript
+schema.set('toJSON', {getters: true})
+schema.set('toObject', {getters: true})
+```
 
 ### Options
 This plugin currently has only one option: `setters.applyOn`.
 
 Below is the defaults object for reference:
 
-    const defaults = {
-      getters: {},
-      setters: {
-        applyOn: 'save',
-        // (enum) When setters should be applied
-        // change: only execute when path was modified (behaves like an ordinary setter)
-        // save: execute every time before saving
-      }
-    }
+```javascript
+const defaults = {
+  getters: {},
+  setters: {
+    applyOn: 'save',
+    // (enum) When setters should be applied
+    // change: only execute when path was modified (behaves like an ordinary setter)
+    // save: execute every time before saving
+  }
+}
+```
 
 ## How it works
 - Getter logic is located in `./src/applyGetters.js`.
