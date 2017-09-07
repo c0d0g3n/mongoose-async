@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const plugin = require('./plugin/plugin.js')
+const plugin = require('../src/plugin.js')
 
 const timeout = (timeout) => new Promise((resolve) => {
   setTimeout(() => resolve(), timeout)

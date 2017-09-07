@@ -1,13 +1,18 @@
 {
   "name": "mongoose-async",
+  "descriptions": "Little mongoose plugin that mocks getters/setters and accepts promises (async)",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/plugin.js",
   "license": "MIT",
+  "repository": "https://github.com/c0d0g3n/mongoose-async",
+  "author": "c0d0g3n <c0d0g3n@gmail.com> (https://github.com/c0d0g3n)",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon test/index.js"
   },
   "dependencies": {
-    "is-promise": "^2.1.0",
+    "is-promise": "^2.1.0"
+  },
+  "devDependencies": {
     "mongoose": "^4.11.10"
   }
 }
