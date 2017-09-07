@@ -1,4 +1,5 @@
 # Mongoose Async
+> Little mongoose plugin that mocks getters/setters and accepts promises (async)
 
 ## Preface ([skip to installation](#installation))
 Let's face it, Mongoose works great until it does not&trade;. Searching for another way to make my code more elegant, I decided that most of my schema's pre and post hooks should go into getters and setters. However, most hooks rely on asynchronous functions or promises and Mongoose does not currently support that. (To be fair, this is acually a JavaScript limitation, but Mongoose could've implemented getter/setter functionality in a different way.)
