@@ -18,8 +18,8 @@
   },
   "dependencies": {
     "is-promise": "^2.1.0"
-  },
-  "devDependencies": {
+  }
+  "peerDependencies": {
     "mongoose": "^4.11.10"
   }
 }
