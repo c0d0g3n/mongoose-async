@@ -1,6 +1,6 @@
 const isPromise = require('is-promise')
 
-module.exports = (getters, options) => function (doc, next) {
+module.exports = (getters, options) => function (doc) {
   // doc === this
   const promises = []
 
@@ -25,12 +25,8 @@ module.exports = (getters, options) => function (doc, next) {
     }
   }
 
-  Promise
-    .all(promises)
-    // wait till all promises are complete
-    .then(() => next())
-    // centralized error handling
-    .catch((err) => next(err))
+  return Promise.all(promises)
+
 }
 
 const applyGetter = (doc, path, result) => {
