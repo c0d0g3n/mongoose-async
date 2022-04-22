@@ -8,9 +8,7 @@ const timeout = (timeout) => new Promise((resolve) => {
 
 // SETUP MONGOOSE
 mongoose.Promise = Promise
-mongoose.connect('mongodb://localhost:27017/mongoose-async', {
-  useMongoClient: true,
-})
+mongoose.connect('mongodb://localhost:27017/mongoose-async')
 mongoose.connection.on('error', (err) => console.error(err))
 mongoose.connection.on('open', () => console.log('db ok'))
 

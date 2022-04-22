@@ -20,6 +20,6 @@
     "is-promise": "^2.1.0"
   },
   "devDependencies": {
-    "mongoose": "^4.11.10"
+    "mongoose": "^6.2.9"
   }
 }
